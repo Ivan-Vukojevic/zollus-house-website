@@ -612,7 +612,7 @@
   }
 
   .mb-8 {
-    margin-bottom: 0;
+    margin-bottom: calc(var(--spacing) * 8);
   }
 
   .mb-12 {
@@ -2354,4 +2354,3 @@ html [data-sonner-toast][data-swiped=true] {
   -ms-user-select: none !important;
   user-select: none !important;
 }
-

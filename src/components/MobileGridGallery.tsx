@@ -216,7 +216,7 @@ export function MobileGridGallery({ className = '' }: MobileGridGalleryProps) {
                   <ResponsivePicture
                     alt={t(`gallery.imageAlts.${image.key}`)}
                     imgSrc={image.src}
-                    imgClassName="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                    imgClassName="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110 aspect-square"
                     sizes="(min-width: 768px) 50vw, 50vw"
                     sources={[
                       { type: 'image/avif', srcSet: buildSrcSet([mRect1Avif, mRect2Avif, mRect3Avif, mRect4Avif][index] as any, 'w') },
@@ -304,7 +304,7 @@ export function MobileGridGallery({ className = '' }: MobileGridGalleryProps) {
               <ImageWithFallback
                 src={images[selectedImage].src}
                 alt={t(`gallery.imageAlts.${images[selectedImage].key}`)}
-                className="w-full h-full object-contain rounded-lg"
+                className="w-full h-full object-contain rounded-lg aspect-[4/5]"
                 loading='lazy'
               />
               

@@ -337,6 +337,26 @@ export default function App() {
                 >
                   {t('about.paragraph2')}
                 </motion.p>
+                <motion.p
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: 0.8 }}
+                  className="mt-4 text-sm leading-relaxed mobile-about-text"
+                >
+                  {(() => {
+                    const [firstPart, secondPart] = t('about.priceInfo').split(' | ');
+                    const [beforePrice, afterPrice] = firstPart.split('185.00 EUR');
+                    return (
+                      <>
+                        <span className="text-base text-white">{beforePrice}</span>
+                        <span className="font-bold text-lg text-white">185.00 EUR</span>
+                        <span className="text-base text-white">{afterPrice}</span>
+                        <br />
+                        <span className="text-xs text-white/80">{secondPart}</span>
+                      </>
+                    );
+                  })()}
+                </motion.p>
               </div>
 
               <motion.div
@@ -413,7 +433,7 @@ export default function App() {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="order-1 md:order-2 bg-[#a18f85] p-6 sm:p-5 mt-0 sm:mt-12 mb-8 sm:mb-8 pb-20 mx-6"
+            className="order-1 md:order-2 bg-[#a18f85] p-6 sm:p-5 mt-0 sm:mt-12 mb-0 pb-16 sm:pb-20 mx-6"
           >
             <div className="text-center mb-6 sm:mb-4">
               <motion.p
@@ -574,6 +594,21 @@ export default function App() {
                 <p>{t('about.paragraph1')}</p>
                 <p>
                   {t('about.paragraph2')}
+                </p>
+                <p className="mt-4 text-base leading-relaxed text-gray-600">
+                  {(() => {
+                    const [firstPart, secondPart] = t('about.priceInfo').split(' | ');
+                    const [beforePrice, afterPrice] = firstPart.split('185.00 EUR');
+                    return (
+                      <>
+                        {beforePrice}
+                        <span className="font-bold text-gray-900">185.00 EUR</span>
+                        {afterPrice}
+                        <span className="text-gray-600"> | </span>
+                        {secondPart}
+                      </>
+                    );
+                  })()}
                 </p>
               </motion.div>
             </motion.div>

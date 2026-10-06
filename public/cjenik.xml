@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cjenik_smjestaja xmlns:xsi="http://w3.org" xsi:noNamespaceSchemaLocation="http://mint.hr">
+  
+  {/* Službeni podaci o obvezniku i objektu */}
+  <obveznik>
+    <ime_prezime>Alen Vukojević</ime_prezime>
+    <oib>47555896124</oib>
+    <adresa_objekta>Osijek, Hrvatska</adresa_objekta>
+    <vrsta_smjestaja>Kuca za odmor</vrsta_smjestaja>
+    <kategorija_zvjezdice>0</kategorija_zvjezdice>
+    <evisitor_id>0250687</evisitor_id>
+  </obveznik>
+
+  {/* Popis svih pojedinačnih maloprodajnih stavki */}
+  <usluge>
+    
+    {/* Stavka 1: Glavna usluga noćenja */}
+    <stavka_cjenika>
+      <id>1</id>
+      <naziv_usluge>Nocenje u kuci za odmor ZollusHouse (redovna cijena)</naziv_usluge>
+      <jedinica_naplate>po nocenju</jedinica_naplate>
+      <cijena_bez_pdv>185.00</cijena_bez_pdv>
+      <stopa_pdv>0.00</stopa_pdv>
+      <iznos_pdv>0.00</iznos_pdv>
+      <ukupna_cijena_eur>185.00</ukupna_cijena_eur>
+      <minimalan_boravak_dana>2</minimalan_boravak_dana>
+      <usidrena_cijena_10_09_2026>185.00</usidrena_cijena_10_09_2026>
+      <poseban_oblik_prodaje>Ne</poseban_oblik_prodaje>
+      <napomena>Cijena vrijedi iskljucivo za izravne rezervacije. Usluga je oslobodena PDV-a prema cl. 90. st. 2. Zakona o PDV-u.</napomena>
+    </stavka_cjenika>
+
+    {/* Stavka 2: Turistička pristojba (Uključena u cijenu) */}
+    <stavka_cjenika>
+      <id>2</id>
+      <naziv_usluge>Turisticka (boravisna) pristojba</naziv_usluge>
+      <jedinica_naplate>po osobi/nocenju</jedinica_naplate>
+      <cijena_bez_pdv>0.00</cijena_bez_pdv>
+      <stopa_pdv>0.00</stopa_pdv>
+      <iznos_pdv>0.00</iznos_pdv>
+      <ukupna_cijena_eur>0.00</ukupna_cijena_eur>
+      <minimalan_boravak_dana>0</minimalan_boravak_dana>
+      <usidrena_cijena_10_09_2026>0.00</usidrena_cijena_10_09_2026>
+      <poseban_oblik_prodaje>Ne</poseban_oblik_prodaje>
+      <napomena>Ukljuceno u cijenu nocenja.</napomena>
+    </stavka_cjenika>
+
+    {/* Stavka 3: Završno čišćenje (Uključeno u cijenu) */}
+    <stavka_cjenika>
+      <id>3</id>
+      <naziv_usluge>Zavrsno ciscenje objekta</naziv_usluge>
+      <jedinica_naplate>jednokratno</jedinica_naplate>
+      <cijena_bez_pdv>0.00</cijena_bez_pdv>
+      <stopa_pdv>0.00</stopa_pdv>
+      <iznos_pdv>0.00</iznos_pdv>
+      <ukupna_cijena_eur>0.00</ukupna_cijena_eur>
+      <minimalan_boravak_dana>0</minimalan_boravak_dana>
+      <usidrena_cijena_10_09_2026>0.00</usidrena_cijena_10_09_2026>
+      <poseban_oblik_prodaje>Ne</poseban_oblik_prodaje>
+      <napomena>Ukljuceno u cijenu nocenja.</napomena>
+    </stavka_cjenika>
+
+    {/* Stavka 4: Prijava gosta (Uključena u cijenu) */}
+    <stavka_cjenika>
+      <id>4</id>
+      <naziv_usluge>Prijava gosta (eVisitor)</naziv_usluge>
+      <jedinica_naplate>po gostu</jedinica_naplate>
+      <cijena_bez_pdv>0.00</cijena_bez_pdv>
+      <stopa_pdv>0.00</stopa_pdv>
+      <iznos_pdv>0.00</iznos_pdv>
+      <ukupna_cijena_eur>0.00</ukupna_cijena_eur>
+      <minimalan_boravak_dana>0</minimalan_boravak_dana>
+      <usidrena_cijena_10_09_2026>0.00</usidrena_cijena_10_09_2026>
+      <poseban_oblik_prodaje>Ne</poseban_oblik_prodaje>
+      <napomena>Ukljuceno u cijenu nocenja.</napomena>
+    </stavka_cjenika>
+
+  </usluge>
+</cjenik_smjestaja>

@@ -33,6 +33,8 @@ i18n.use(initReactI18next).init({
             "Zollus House je luksuzna gostinjska kuća smještena u srcu grada, koja nudi jedinstven spoj moderne udobnosti i klasične elegancije. Naš smještaj ima pažljivo uređene sobe opremljene vrhunskim sadržajima kako bi vaš boravak bio što ugodniji.",
           paragraph2:
             "Ova gostinjska kuća pruža romantičnu i opuštenu atmosferu, idealnu za kraća poslovna putovanja, obiteljske posjete ili vikend odmor.",
+          priceInfo:
+            "Trenutna cijena noćenja: 185.00 EUR | Referentna cijena od 10. rujna 2026.: 185.00 EUR",
         },
         amenities: {
           title: "Premium sadržaji",
@@ -115,6 +117,30 @@ i18n.use(initReactI18next).init({
           description:
             "Spremni za doživljaj luksuza i udobnosti? Javite nam se za rezervaciju ili više informacija o našem premium smještaju.",
         },
+        legal: {
+          ownerTitle: "Službeni podaci vlasnika",
+          ownerLabel: "Voditelj obrade / Vlasnik:",
+          oibLabel: "OIB:",
+          eVisitorLabel: "eVisitor ID objekta:",
+          emailLabel: "Email:",
+          telLabel: "Tel:",
+          bookingTitle: "Uvjeti rezervacije i otkazivanja",
+          bookingContent: {
+            payment: "Plaćanje i otkazivanje: Rezervacije se vrše isključivo putem kontakt forme, e-maila ili telefona. Akontacija 30% u roku 48h, preostalih 70% pri dolasku. Besplatno otkazivanje do 14 dana prije dolaska uz povrat akontacije. Kasno otkazivanje zadržava akontaciju.",
+            houseRules: "Boravak i kućni red: Check-in od 15:00h, Check-out do 10:00h. Minimalan boravak je 2 noćenja. Pušenje i kućni ljubimci strogo zabranjeni. Noćni mir od 22:00 do 08:00h.",
+            fees: "Naknade i porezi: Boravišna pristojba i završno čišćenje uključeni su u istaknutu cijenu. Sukladno čl. 90. Zakona o PDV-u, usluga je oslobođena plaćanja PDV-a.",
+            security: "Sigurnost i odgovornost: Gosti su odgovorni za očuvanje imovine i opreme. Svaka počinjena šteta bit će naplaćena na licu mjesta. Domaćin ne odgovara za gubitak dragocjenosti i osobnih stvari gostiju. Molimo vas da prilikom izlaska iz objekta obvezno zaključate vrata, zatvorite prozore i isključite električne uređaje (klimu, rasvjetu).",
+            note: "Napomena: Istaknuta cijena je informativnog karaktera i vrijedi isključivo za izravne rezervacije s domaćinom.",
+          },
+          privacyTitle: "Pravila privatnosti (GDPR)",
+          privacyContent:
+            "Podaci prikupljeni preko kontakt forme i prilikom rezervacije obrađuju se isključivo u svrhu rezervacije i zakonske prijave u eVisitor (ID objekta: {{eVisitorId}}). Kontakt za privatnost: {{email}}.",
+          complaintsTitle: "Prigovori potrošača",
+          complaintsContent:
+            "Sukladno Zakonu o zaštiti potrošača, pisani prigovor može se poslati na e-mail: {{email}} ili poštom na adresu domaćina.",
+          complaintsResponseTime: "Rok za odgovor je 15 dana.",
+          officialPriceList: "SLUŽBENI CJENIK (XML)",
+        },
         form: {
           namePlaceholder: "Vaše ime",
           emailPlaceholder: "Vaš email",
@@ -171,6 +197,8 @@ i18n.use(initReactI18next).init({
             "Zollus House is a luxurious guesthouse located in the heart of the city, offering a unique blend of modern comfort and classic elegance. Our guesthouse features beautifully designed rooms, each equipped with high-end amenities to ensure a comfortable stay.",
           paragraph2:
             "This guesthouse offers a romantic and relaxed atmosphere, perfect for short business trips, family visits, or weekend getaways.",
+          priceInfo:
+            "Current overnight price: 185.00 EUR | Reference price on Sept 10, 2026: 185.00 EUR",
         },
         amenities: {
           title: "Premium Amenities",
@@ -252,6 +280,30 @@ i18n.use(initReactI18next).init({
           stayBegins: "Your stay begins here",
           description:
             "Ready to experience luxury and comfort like never before? Get in touch with us to book your stay or learn more about our premium accommodations.",
+        },
+        legal: {
+          ownerTitle: "Property Owner Information",
+          ownerLabel: "Property Manager / Owner:",
+          oibLabel: "Tax ID (OIB):",
+          eVisitorLabel: "Property Registration ID:",
+          emailLabel: "Email:",
+          telLabel: "Phone:",
+          bookingTitle: "Booking & Cancellation Policy",
+          bookingContent: {
+            payment: "Payment & Cancellation: Bookings are made exclusively through the contact form, email, or phone. 30% deposit required within 48 hours of booking, remaining 70% due upon arrival. Free cancellation up to 14 days before check-in with full deposit refund. Cancellations within 14 days forfeit the deposit.",
+            houseRules: "Stay & House Rules: Check-in from 15:00 / Check-out by 10:00. Minimum stay of 2 nights. Smoking and pets strictly prohibited. Quiet hours: 22:00–08:00.",
+            fees: "Fees & Taxes: Tourist tax and final cleaning are included in the stated price. In accordance with Article 90 of the VAT Law, this service is VAT-exempt.",
+            security: "Security & Liability: Guests are responsible for preserving the property and equipment. Any damage will be charged on the spot. The owner is not liable for loss of valuables or personal belongings. Please ensure you lock all doors, close windows, and turn off electrical appliances (air conditioning, lights) when leaving the property.",
+            note: "Note: The stated price is informational in nature and applies exclusively to direct bookings with the property owner.",
+          },
+          privacyTitle: "Data Privacy & GDPR",
+          privacyContent:
+            "Your personal information collected via contact form and during booking is processed exclusively for reservation purposes and statutory registration in the eVisitor system (property ID: {{eVisitorId}}). For privacy inquiries, contact {{email}}.",
+          complaintsTitle: "Guest Complaints & Disputes",
+          complaintsContent:
+            "In accordance with consumer protection regulations, written complaints may be submitted to {{email}} or by post to the property address.",
+          complaintsResponseTime: "Response guaranteed within 15 days.",
+          officialPriceList: "OFFICIAL PRICE LIST (XML)",
         },
         form: {
           namePlaceholder: "Your Name",

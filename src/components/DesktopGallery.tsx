@@ -134,7 +134,7 @@ export function DesktopGallery({ className = '' }: DesktopGalleryProps) {
                 <ResponsivePicture
                   alt={t(`gallery.imageAlts.${image.key}`)}
                   imgSrc={image.src}
-                  imgClassName="w-full h-full object-cover"
+                  imgClassName="w-full h-full object-cover aspect-[4/5]"
                   sizes="(min-width: 1280px) 20vw, (min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
                   sources={[
                     { type: 'image/avif', srcSet: buildSrcSet([rect1Avif, rect2Avif, rect3Avif, rect4Avif, rect5Avif, rect6Avif, rect7Avif, rect8Avif, rect9Avif, rect10Avif][index] as any, 'w') },
@@ -145,7 +145,7 @@ export function DesktopGallery({ className = '' }: DesktopGalleryProps) {
                 <ImageWithFallback
                   src={image.src}
                   alt={t(`gallery.imageAlts.${image.key}`)}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover aspect-[4/5]"
                   loading='lazy'
                 />
               )}

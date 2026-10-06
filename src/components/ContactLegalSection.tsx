@@ -1,4 +1,5 @@
 import { ExternalLink } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 const OWNER_DATA = {
   owner: 'Alen Vukojević',
@@ -13,66 +14,83 @@ interface ContactLegalSectionProps {
 }
 
 export function ContactLegalSection({ className = '' }: ContactLegalSectionProps) {
+  const { t } = useTranslation();
+
   return (
-    <section className={`w-full text-left ${className}`} style={{backgroundColor: 'rgb(141, 122, 112)', paddingTop: '80px', paddingBottom: '120px', borderTop: 'none', marginTop: '-1px'}}>
+    <section
+      className={`relative w-full text-left ${className}`}
+      style={{ backgroundColor: 'rgb(141, 122, 112)', paddingTop: '56px', paddingBottom: '120px' }}
+    >
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-0 top-0 h-10"
+        style={{
+          background: 'linear-gradient(to bottom, rgba(161, 143, 133, 0.9), rgba(141, 122, 112, 0))',
+        }}
+      />
       <div className="mx-auto px-4 sm:px-6" style={{maxWidth: '500px'}}>
-        <div className="space-y-6" style={{marginBottom: '24px'}}>
-          <details className="group overflow-hidden rounded-xl border-0 backdrop-blur-md" style={{backgroundColor: 'white', border: 'none', outline: 'none'}}>
+        <div className="space-y-4 sm:space-y-5" style={{marginBottom: '24px'}}>
+          <details className="group overflow-hidden rounded-xl border-0 backdrop-blur-md shadow-sm transition-shadow duration-200 hover:shadow-md" style={{backgroundColor: 'rgba(255, 255, 255, 0.96)', border: 'none', outline: 'none'}}>
             <summary 
-              className="flex cursor-pointer list-none items-center justify-between gap-3 px-4 sm:px-6 py-3 text-sm font-normal text-left transition-colors duration-200 [&::-webkit-details-marker]:hidden"
+              className="flex cursor-pointer list-none items-center justify-between gap-3 px-4 sm:px-6 py-3 text-sm font-medium text-left transition-colors duration-200 [&::-webkit-details-marker]:hidden"
               style={{cursor: 'pointer', color: 'rgb(141, 122, 112)'}}
             >
-              <span>Službeni podaci vlasnika</span>
+              <span>{t('legal.ownerTitle')}</span>
               <span className="flex h-5 w-5 items-center justify-center rounded-full border border-white/30 text-base leading-none transition-transform duration-200 group-open:rotate-45 shrink-0" style={{backgroundColor: 'rgb(141, 122, 112)', color: 'white'}}>+</span>
             </summary>
             <div className="px-6 pb-5 pt-4 text-sm font-normal text-white/90 leading-relaxed text-left space-y-2" style={{backgroundColor: 'rgba(141, 122, 112, 0.1)', color: 'rgb(141, 122, 112)'}}>
-              <p><strong className="text-white font-semibold" style={{color: 'rgb(141, 122, 112)'}}>Voditelj obrade / Vlasnik:</strong> {OWNER_DATA.owner}</p>
-              <p><strong className="text-white font-semibold" style={{color: 'rgb(141, 122, 112)'}}>OIB:</strong> {OWNER_DATA.oib}</p>
-              <p><strong className="text-white font-semibold" style={{color: 'rgb(141, 122, 112)'}}>eVisitor ID objekta:</strong> {OWNER_DATA.eVisitorId}</p>
-              <p><strong className="text-white font-semibold" style={{color: 'rgb(141, 122, 112)'}}>Email:</strong> {OWNER_DATA.email}</p>
-              <p><strong className="text-white font-semibold" style={{color: 'rgb(141, 122, 112)'}}>Tel:</strong> {OWNER_DATA.tel}</p>
+              <p className="text-sm"><strong className="text-white font-semibold" style={{color: 'rgb(141, 122, 112)'}}>{t('legal.ownerLabel')}</strong> {OWNER_DATA.owner}</p>
+              <p className="text-sm"><strong className="text-white font-semibold" style={{color: 'rgb(141, 122, 112)'}}>{t('legal.oibLabel')}</strong> {OWNER_DATA.oib}</p>
+              <p className="text-sm"><strong className="text-white font-semibold" style={{color: 'rgb(141, 122, 112)'}}>{t('legal.eVisitorLabel')}</strong> {OWNER_DATA.eVisitorId}</p>
+              <p className="text-sm"><strong className="text-white font-semibold" style={{color: 'rgb(141, 122, 112)'}}>{t('legal.emailLabel')}</strong> {OWNER_DATA.email}</p>
+              <p className="text-sm"><strong className="text-white font-semibold" style={{color: 'rgb(141, 122, 112)'}}>{t('legal.telLabel')}</strong> {OWNER_DATA.tel}</p>
             </div>
           </details>
 
-          <details className="group overflow-hidden rounded-xl border-0 backdrop-blur-md" style={{backgroundColor: 'white', border: 'none', outline: 'none'}}>
+          <details className="group overflow-hidden rounded-xl border-0 backdrop-blur-md shadow-sm transition-shadow duration-200 hover:shadow-md" style={{backgroundColor: 'rgba(255, 255, 255, 0.96)', border: 'none', outline: 'none'}}>
             <summary 
-              className="flex cursor-pointer list-none items-center justify-between gap-3 px-4 sm:px-6 py-3 text-sm font-normal text-left transition-colors duration-200 [&::-webkit-details-marker]:hidden"
+              className="flex cursor-pointer list-none items-center justify-between gap-3 px-4 sm:px-6 py-3 text-sm font-medium text-left transition-colors duration-200 [&::-webkit-details-marker]:hidden"
               style={{cursor: 'pointer', color: 'rgb(141, 122, 112)'}}
             >
-              <span>Uvjeti rezervacije i otkazivanja</span>
+              <span>{t('legal.bookingTitle')}</span>
               <span className="flex h-5 w-5 items-center justify-center rounded-full border border-white/30 text-base leading-none transition-transform duration-200 group-open:rotate-45 shrink-0" style={{backgroundColor: 'rgb(141, 122, 112)', color: 'white'}}>+</span>
             </summary>
             <div className="px-6 pb-5 pt-4 text-sm font-normal text-white/90 leading-relaxed text-left space-y-2" style={{backgroundColor: 'rgba(141, 122, 112, 0.1)', color: 'rgb(141, 122, 112)'}}>
-              <p><strong className="text-white font-semibold" style={{color: 'rgb(141, 122, 112)'}}>Plaćanje:</strong> Akontacija 30% u roku 48h, preostalih 70% pri dolasku.</p>
-              <p><strong className="text-white font-semibold" style={{color: 'rgb(141, 122, 112)'}}>Otkazivanje:</strong> Besplatno otkazivanje do 14 dana prije dolaska uz povrat akontacije. Kasno otkazivanje zadržava akontaciju.</p>
-              <p><strong className="text-white font-semibold" style={{color: 'rgb(141, 122, 112)'}}>Kućni red:</strong> Check-in od 15:00h, Check-out do 10:00h. Pušenje i kućni ljubimci strogo zabranjeni. Noćni mir od 22:00 do 08:00h.</p>
+              <p className="text-sm"><strong className="text-white font-semibold" style={{color: 'rgb(141, 122, 112)'}}>Plaćanje i otkazivanje:</strong> {t('legal.bookingContent.payment').replace('Plaćanje i otkazivanje: ', '')}</p>
+              <p className="text-sm"><strong className="text-white font-semibold" style={{color: 'rgb(141, 122, 112)'}}>Boravak i kućni red:</strong> {t('legal.bookingContent.houseRules').replace('Boravak i kućni red: ', '')}</p>
+              <p className="text-sm"><strong className="text-white font-semibold" style={{color: 'rgb(141, 122, 112)'}}>Naknade i porezi:</strong> {t('legal.bookingContent.fees').replace('Naknade i porezi: ', '')}</p>
+              <p className="text-sm"><strong className="text-white font-semibold" style={{color: 'rgb(141, 122, 112)'}}>Sigurnost i odgovornost:</strong> {t('legal.bookingContent.security').replace('Sigurnost i odgovornost: ', '')}</p>
+              <p className="text-sm"><strong className="text-white font-semibold" style={{color: 'rgb(141, 122, 112)'}}>Napomena:</strong> {t('legal.bookingContent.note').replace('Napomena: ', '')}</p>
             </div>
           </details>
 
-          <details className="group overflow-hidden rounded-xl border-0 backdrop-blur-md" style={{backgroundColor: 'white', border: 'none', outline: 'none'}}>
+          <details className="group overflow-hidden rounded-xl border-0 backdrop-blur-md shadow-sm transition-shadow duration-200 hover:shadow-md" style={{backgroundColor: 'rgba(255, 255, 255, 0.96)', border: 'none', outline: 'none'}}>
             <summary 
-              className="flex cursor-pointer list-none items-center justify-between gap-3 px-4 sm:px-6 py-3 text-sm font-normal text-left transition-colors duration-200 [&::-webkit-details-marker]:hidden"
+              className="flex cursor-pointer list-none items-center justify-between gap-3 px-4 sm:px-6 py-3 text-sm font-medium text-left transition-colors duration-200 [&::-webkit-details-marker]:hidden"
               style={{cursor: 'pointer', color: 'rgb(141, 122, 112)'}}
             >
-              <span>Pravila privatnosti (GDPR)</span>
+              <span>{t('legal.privacyTitle')}</span>
               <span className="flex h-5 w-5 items-center justify-center rounded-full border border-white/30 text-base leading-none transition-transform duration-200 group-open:rotate-45 shrink-0" style={{backgroundColor: 'rgb(141, 122, 112)', color: 'white'}}>+</span>
             </summary>
             <div className="px-6 pb-5 pt-4 text-sm font-normal text-white/90 leading-relaxed text-left" style={{backgroundColor: 'rgba(141, 122, 112, 0.1)', color: 'rgb(141, 122, 112)'}}>
-              Podaci prikupljeni preko kontakt forme i prilikom rezervacije obrađuju se isključivo u svrhu rezervacije i zakonske prijave u eVisitor (ID objekta: {OWNER_DATA.eVisitorId}). Kontakt za privatnost: {OWNER_DATA.email}.
+              <p className="text-sm">{t('legal.privacyContent', {
+                eVisitorId: OWNER_DATA.eVisitorId,
+                email: OWNER_DATA.email,
+              })}</p>
             </div>
           </details>
 
-          <details className="group overflow-hidden rounded-xl border-0 backdrop-blur-md" style={{backgroundColor: 'white', border: 'none', outline: 'none'}}>
+          <details className="group overflow-hidden rounded-xl border-0 backdrop-blur-md shadow-sm transition-shadow duration-200 hover:shadow-md" style={{backgroundColor: 'rgba(255, 255, 255, 0.96)', border: 'none', outline: 'none'}}>
             <summary 
-              className="flex cursor-pointer list-none items-center justify-between gap-3 px-4 sm:px-6 py-3 text-sm font-normal text-left transition-colors duration-200 [&::-webkit-details-marker]:hidden"
+              className="flex cursor-pointer list-none items-center justify-between gap-3 px-4 sm:px-6 py-3 text-sm font-medium text-left transition-colors duration-200 [&::-webkit-details-marker]:hidden"
               style={{cursor: 'pointer', color: 'rgb(141, 122, 112)'}}
             >
-              <span>Prigovori potrošača</span>
+              <span>{t('legal.complaintsTitle')}</span>
               <span className="flex h-5 w-5 items-center justify-center rounded-full border border-white/30 text-base leading-none transition-transform duration-200 group-open:rotate-45 shrink-0" style={{backgroundColor: 'rgb(141, 122, 112)', color: 'white'}}>+</span>
             </summary>
             <div className="px-6 pb-5 pt-4 text-sm font-normal text-white/90 leading-relaxed text-left space-y-2" style={{backgroundColor: 'rgba(141, 122, 112, 0.1)', color: 'rgb(141, 122, 112)'}}>
-              <p>Sukladno Zakonu o zaštiti potrošača, pisani prigovor može se poslati na e-mail: {OWNER_DATA.email} ili poštom na adresu domaćina.</p>
-              <p>Rok za odgovor je 15 dana.</p>
+              <p className="text-sm">{t('legal.complaintsContent', { email: OWNER_DATA.email })}</p>
+              <p className="text-sm">{t('legal.complaintsResponseTime')}</p>
             </div>
           </details>
         </div>
@@ -90,7 +108,7 @@ export function ContactLegalSection({ className = '' }: ContactLegalSectionProps
           onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = 'rgb(245, 245, 245)')}
           onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = 'white')}
         >
-          <span>SLUŽBENI CJENIK (XML STRUKTURA)</span>
+          <span>{t('legal.officialPriceList')}</span>
           <ExternalLink className="h-4 w-4 shrink-0 transition-transform duration-200 group-hover:translate-x-0.5" style={{color: 'rgb(141, 122, 112)'}} />
         </a>
 
