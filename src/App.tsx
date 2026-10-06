@@ -10,10 +10,12 @@ import { DesktopAmenities } from "./components/DesktopAmenities";
 import { MobileGridGallery } from "./components/MobileGridGallery";
 import { OriginalMobileAmenities } from "./components/OriginalMobileAmenities";
 import { ContactForm } from "./components/ContactForm";
+import { ContactLegalSection } from "./components/ContactLegalSection";
 import { ImageWithFallback } from "./components/figma/ImageWithFallback";
 import { ResponsivePicture, buildSrcSet } from "./components/figma/ResponsivePicture";
 import { Toaster } from "./components/ui/sonner";
 import { SpeedInsights } from '@vercel/speed-insights/react';
+import { useTranslation } from 'react-i18next';
 // Hero background: default image plus imagetools-generated variants
 import heroDefault from "./assets/hero/hero-background.webp";
 // Generate multiple width variants (WebP), returned as an object map
@@ -27,6 +29,7 @@ import contactVariants from "./assets/contact/contact-background.webp?w=640;960;
 import contactAvif from "./assets/contact/contact-background.webp?w=640;960;1280;1920;2560&format=avif;avif;avif;avif;avif&as=object";  
 
 export default function App() {
+  const { t, i18n } = useTranslation();
   const [activeSection, setActiveSection] = useState("welcome");
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
@@ -73,6 +76,12 @@ export default function App() {
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const currentLanguage = i18n.resolvedLanguage === "en" ? "en" : "hr";
+  const setLanguage = (language: "hr" | "en") => {
+    void i18n.changeLanguage(language);
+    window.localStorage.setItem("appLanguage", language);
   };
 
   const scrollToSection = (section: string) => {
@@ -221,14 +230,39 @@ export default function App() {
   if (isMobile) {
     // Mobile layout (existing implementation)
     return (
-      <div className="min-h-screen bg-white">
+      <div className="min-h-screen bg-white pb-28">
+        <div className="fixed top-4 right-4 z-40">
+          <div className="flex items-center gap-1 rounded-full border border-white/40 bg-black/20 px-1 py-1 text-white shadow-lg backdrop-blur-md">
+            <button
+              type="button"
+              onClick={() => setLanguage("hr")}
+              aria-label={t("common.switchToCroatian")}
+              className={`rounded-full px-3 py-1 text-xs font-semibold transition-all ${
+                currentLanguage === "hr" ? "bg-[#a18f85] text-white" : "text-white/90 hover:bg-white/20"
+              }`}
+            >
+              HR
+            </button>
+            <button
+              type="button"
+              onClick={() => setLanguage("en")}
+              aria-label={t("common.switchToEnglish")}
+              className={`rounded-full px-3 py-1 text-xs font-semibold transition-all ${
+                currentLanguage === "en" ? "bg-[#a18f85] text-white" : "text-white/90 hover:bg-white/20"
+              }`}
+            >
+              EN
+            </button>
+          </div>
+        </div>
+
         {/* Welcome Section */}
         <section
           id="welcome"
           className="relative h-screen w-full overflow-hidden"
         >
           <ResponsivePicture
-            alt="Zollus House exterior"
+            alt={t('media.alt.heroExterior')}
             imgSrc={heroDefault}
             className="absolute inset-0"
             imgClassName="w-full h-full object-cover"
@@ -252,7 +286,7 @@ export default function App() {
                 className="space-y-4"
               >
                 <p className="text-lg tracking-widest uppercase opacity-90 mb-6">
-                  Welcome to
+                  {t('hero.welcomeTo')}
                 </p>
                 <h1 className="text-6xl sm:text-7xl font-bold uppercase leading-none tracking-tight">
                   <span className="block text-shadow-2xl">
@@ -264,7 +298,7 @@ export default function App() {
                 </h1>
                 <div className="w-16 h-0.5 bg-white/60 mx-auto mt-8"></div>
                 <p className="text-sm uppercase tracking-wide opacity-80 mt-6">
-                  Luxury • Comfort • Elegance
+                  {t('hero.highlights')}
                 </p>
               </motion.div>
             </div>
@@ -276,15 +310,15 @@ export default function App() {
           id="about"
           className="relative min-h-screen w-full"
         >
-          <div className="bg-[#a18f85] h-96 relative">
-            <div className="absolute inset-0 p-6 text-white">
+          <div className="bg-[#a18f85] relative">
+            <div className="p-6 pb-8 text-white">
               <motion.h2
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
                 className="text-4xl font-bold text-center uppercase mb-6 mt-8"
               >
-                About Us
+                {t('about.title')}
               </motion.h2>
               <div className="max-w-md mx-auto space-y-4 text-center">
                 <motion.p
@@ -293,9 +327,7 @@ export default function App() {
                   transition={{ duration: 0.8, delay: 0.4 }}
                   className="text-sm leading-relaxed mobile-about-text"
                 >
-                  Zollus House is a luxurious guesthouse located
-                  in the heart of the city, offering a unique
-                  blend of modern comfort and classic elegance.
+                  {t('about.paragraph1')}
                 </motion.p>
                 <motion.p
                   initial={{ opacity: 0, y: 20 }}
@@ -303,9 +335,7 @@ export default function App() {
                   transition={{ duration: 0.8, delay: 0.6 }}
                   className="text-sm leading-relaxed mobile-about-text"
                 >
-                  This guesthouse offers a romantic and relaxed
-                  atmosphere, perfect for short business trips,
-                  family visits, or weekend getaways.
+                  {t('about.paragraph2')}
                 </motion.p>
               </div>
 
@@ -313,6 +343,7 @@ export default function App() {
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.8 }}
+                className="mt-6 mb-10"
               >
                 <OriginalMobileAmenities />
               </motion.div>
@@ -327,7 +358,7 @@ export default function App() {
           >
             <ImageWithFallback
               src={imgRectangle2}
-              alt="Elegant interior view"
+              alt={t('media.alt.elegantInterior')}
               className="w-full h-full object-cover"
             />
           </motion.div>
@@ -344,7 +375,7 @@ export default function App() {
           className="relative min-h-screen w-full"
         >
           <ResponsivePicture
-            alt="Contact background"
+            alt={t('media.alt.contactBackground')}
             imgSrc={contactDefault}
             className="absolute inset-0"
             imgClassName="w-full h-full object-cover"
@@ -367,49 +398,53 @@ export default function App() {
                   transition={{ duration: 0.8, delay: 0.2 }}
                   className="text-4xl font-bold text-white uppercase mb-8"
                 >
-                  Contact Us
+                  {t('contact.title')}
                 </motion.h2>
               </div>
               <ContactForm />
             </div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              className="bg-[#a18f85] rounded-lg p-6 mt-12 mb-8"
-            >
-              <div className="text-center mb-4">
-                <motion.p
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, delay: 0.6 }}
-                  className="text-white text-lg uppercase font-medium"
-                >
-                  Make yourself comfortable
-                </motion.p>
-                <motion.p
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, delay: 0.8 }}
-                  className="text-white text-lg uppercase font-medium"
-                >
-                  Your stay begins here
-                </motion.p>
-              </div>
-              <div className="text-center">
-                <motion.p
-                  initial={{ opacity: 0, y: 15 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, delay: 1.0 }}
-                  className="text-white text-sm"
-                >
-                  All rights reserved © 2025 zollus house
-                </motion.p>
-              </div>
-            </motion.div>
           </div>
         </section>
+
+        <div className="flex flex-col">
+          <ContactLegalSection className="order-2 md:order-1" />
+
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="order-1 md:order-2 bg-[#a18f85] p-6 sm:p-5 mt-0 sm:mt-12 mb-8 sm:mb-8 pb-20 mx-6"
+          >
+            <div className="text-center mb-6 sm:mb-4">
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.6 }}
+                className="text-white text-lg sm:text-lg uppercase font-medium"
+              >
+                {t('contact.comfort')}
+              </motion.p>
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.8 }}
+                className="text-white text-lg sm:text-lg uppercase font-medium mt-2"
+              >
+                {t('contact.stayBegins')}
+              </motion.p>
+            </div>
+            <div className="text-center">
+              <motion.p
+                initial={{ opacity: 0, y: 15 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 1.0 }}
+                className="text-white text-sm"
+              >
+                {t('footer.rights')}
+              </motion.p>
+            </div>
+          </motion.div>
+        </div>
 
         <MobileNavigation
           activeSection={activeSection}
@@ -420,7 +455,7 @@ export default function App() {
           <button
             onClick={scrollToTop}
             className="fixed bottom-20 right-4 z-40 bg-[#a18f85] hover:bg-[#8d7a70] text-white p-3 rounded-full shadow-lg transition-all duration-200"
-            aria-label="Scroll to top"
+            aria-label={t('common.scrollToTop')}
           >
             <ArrowUp size={20} />
           </button>
@@ -447,7 +482,7 @@ export default function App() {
         className="relative h-screen w-full overflow-hidden"
       >
         <ResponsivePicture
-          alt="Zollus House exterior"
+          alt={t('media.alt.heroExterior')}
           imgSrc={heroDefault}
           className="absolute inset-0"
           imgClassName="w-full h-full object-cover"
@@ -482,7 +517,7 @@ export default function App() {
                 transition={{ duration: 0.8, delay: 0.7 }}
                 className="text-xl mb-6 text-white/90"
               >
-                Welcome to Guest House
+                {t('hero.welcomeToGuestHouse')}
               </motion.p>
               <motion.h1
                 initial={{ opacity: 0, y: 30 }}
@@ -503,7 +538,7 @@ export default function App() {
                   onClick={() => scrollToSection("about")}
                   className="bg-[#a18f85] hover:bg-[#8d7a70] text-white px-8 py-4 rounded-full transition-all duration-300 hover:scale-105 shadow-lg"
                 >
-                  Discover More
+                  {t('hero.discoverMore')}
                 </button>
               </motion.div>
             </motion.div>
@@ -528,7 +563,7 @@ export default function App() {
                 transition={{ duration: 0.8, delay: 0.2 }}
                 className="text-6xl font-bold text-[#a18f85] mb-8 uppercase"
               >
-                About Us
+                {t('about.title')}
               </motion.h2>
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -536,18 +571,9 @@ export default function App() {
                 transition={{ duration: 0.8, delay: 0.4 }}
                 className="space-y-6 text-lg text-gray-700 leading-relaxed"
               >
+                <p>{t('about.paragraph1')}</p>
                 <p>
-                  Zollus House is a luxurious guesthouse located
-                  in the heart of the city, offering a unique
-                  blend of modern comfort and classic elegance.
-                  Our guesthouse features beautifully designed
-                  rooms, each equipped with high-end amenities
-                  to ensure a comfortable stay.
-                </p>
-                <p>
-                  This guesthouse offers a romantic and relaxed
-                  atmosphere, perfect for short business trips,
-                  family visits, or weekend getaways.
+                  {t('about.paragraph2')}
                 </p>
               </motion.div>
             </motion.div>
@@ -562,7 +588,7 @@ export default function App() {
               <div className="relative overflow-hidden rounded-2xl shadow-2xl">
                 <ImageWithFallback
                   src={imgRectangle2}
-                  alt="Elegant interior view"
+                  alt={t('media.alt.elegantInterior')}
                   className="w-full h-[600px] object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#a18f85]/20 to-transparent" />
@@ -581,7 +607,7 @@ export default function App() {
               <div className="absolute inset-0 bg-gradient-to-r from-[#a18f85] to-[#8d7a70]" />
               <div className="relative z-10">
                 <h3 className="text-3xl font-bold text-white text-center mb-12 uppercase">
-                  Premium Amenities
+                  {t('amenities.title')}
                 </h3>
                 <DesktopAmenities />
               </div>
@@ -593,7 +619,7 @@ export default function App() {
       {/* Gallery Section (lazy) */}
       <section id="gallery" className="py-20 bg-gray-50">
         <div className="container mx-auto px-6">
-          <Suspense fallback={<div className="text-center text-gray-500 py-12">Loading gallery…</div>}>
+          <Suspense fallback={<div className="text-center text-gray-500 py-12">{t('gallery.loading')}</div>}>
             <DesktopGalleryLazy />
           </Suspense>
         </div>
@@ -605,7 +631,7 @@ export default function App() {
         className="relative py-20 min-h-screen"
       >
         <ResponsivePicture
-          alt="Contact background"
+          alt={t('media.alt.contactBackground')}
           imgSrc={contactDefault}
           className="absolute inset-0"
           imgClassName="w-full h-full object-cover"
@@ -620,44 +646,38 @@ export default function App() {
         <div className="absolute inset-0 bg-gradient-to-r from-[#a18f85]/60 to-[#8d7a70]/60" />
 
         <div className="relative z-10 container mx-auto px-6 h-full flex items-center">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center w-full">
-            {/* Content */}
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
-            >
-              <h2 className="text-6xl font-bold text-white mb-8 uppercase">
-                Contact Us
-              </h2>
-              <div className="space-y-6 text-xl text-white/90 leading-relaxed">
-                <p className="text-2xl font-medium">
-                  Make yourself comfortable
-                </p>
-                <p className="text-xl">Your stay begins here</p>
-                <p className="text-lg">
-                  Ready to experience luxury and comfort like
-                  never before? Get in touch with us to book
-                  your stay or learn more about our premium
-                  accommodations.
-                </p>
-              </div>
-            </motion.div>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center w-full">
+          {/* Content */}
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            <h2 className="text-6xl font-bold text-white mb-8 uppercase">
+              {t('contact.title')}
+            </h2>
+            <div className="space-y-6 text-xl text-white/90 leading-relaxed">
+              <p className="text-2xl font-medium">{t('contact.comfort')}</p>
+              <p className="text-xl">{t('contact.stayBegins')}</p>
+              <p className="text-lg">{t('contact.description')}</p>
+            </div>
+          </motion.div>
 
-            {/* Contact Form */}
+          {/* Contact Form */}
+          <div className="space-y-6">
             <DesktopContactForm />
           </div>
         </div>
-
-        {/* Footer */}
-        <div className="absolute bottom-0 left-0 right-0 bg-[#a18f85]/90 backdrop-blur-sm py-6">
-          <div className="container mx-auto px-6 text-center">
-            <p className="text-white">
-              All rights reserved © 2025 Zollus House
-            </p>
-          </div>
         </div>
       </section>
+
+      <ContactLegalSection />
+
+      <div className="bg-[#a18f85]/90 backdrop-blur-sm py-6">
+        <div className="container mx-auto px-6 text-center">
+        <p className="text-white">{t('footer.rights')}</p>
+        </div>
+      </div>
 
       {/* Scroll to Top Button */}
       {showScrollTop && (
@@ -666,7 +686,7 @@ export default function App() {
           animate={{ opacity: 1, scale: 1 }}
           onClick={scrollToTop}
           className="fixed bottom-8 right-8 z-40 bg-[#a18f85] hover:bg-[#8d7a70] text-white p-4 rounded-full shadow-lg transition-all duration-300 hover:scale-110"
-          aria-label="Scroll to top"
+          aria-label={t('common.scrollToTop')}
         >
           <ArrowUp size={24} />
         </motion.button>

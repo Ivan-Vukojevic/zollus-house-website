@@ -5,6 +5,7 @@ import { Input } from './ui/input';
 import { Textarea } from './ui/textarea';
 import { toast } from 'sonner';
 import { Loader2, Send } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 interface FormData {
   name: string;
@@ -17,6 +18,7 @@ interface DesktopContactFormProps {
 }
 
 export function DesktopContactForm({ className = '' }: DesktopContactFormProps) {
+  const { t } = useTranslation();
   const [formData, setFormData] = useState<FormData>({
     name: '',
     email: '',
@@ -29,17 +31,17 @@ export function DesktopContactForm({ className = '' }: DesktopContactFormProps) 
     const newErrors: Partial<FormData> = {};
 
     if (!formData.name.trim()) {
-      newErrors.name = 'Name is required';
+      newErrors.name = t('form.nameRequired');
     }
 
     if (!formData.email.trim()) {
-      newErrors.email = 'Email is required';
+      newErrors.email = t('form.emailRequired');
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = 'Please enter a valid email address';
+      newErrors.email = t('form.emailInvalid');
     }
 
     if (!formData.message.trim()) {
-      newErrors.message = 'Message is required';
+      newErrors.message = t('form.messageRequired');
     }
 
     setErrors(newErrors);
@@ -50,7 +52,7 @@ export function DesktopContactForm({ className = '' }: DesktopContactFormProps) 
     e.preventDefault();
 
     if (!validateForm()) {
-      toast.error('Please fill in all required fields correctly');
+      toast.error(t('form.invalidFields'));
       return;
     }
 
@@ -76,7 +78,7 @@ export function DesktopContactForm({ className = '' }: DesktopContactFormProps) 
             'currency': 'EUR'
           });
         }
-        toast.success("Message sent successfully! We'll get back to you soon.");
+        toast.success(t('form.success'));
         setFormData({ name: '', email: '', message: '' });
         setErrors({});
       } else {
@@ -84,11 +86,11 @@ export function DesktopContactForm({ className = '' }: DesktopContactFormProps) 
         if (data && data.errors && Array.isArray(data.errors)) {
           toast.error(data.errors.map((err: any) => err.message).join(', '));
         } else {
-          toast.error('Failed to send message. Please try again.');
+          toast.error(t('form.failed'));
         }
       }
     } catch (err) {
-      toast.error('Failed to send message. Please check your network and try again.');
+      toast.error(t('form.failedNetwork'));
     } finally {
       setIsSubmitting(false);
     }
@@ -119,7 +121,7 @@ export function DesktopContactForm({ className = '' }: DesktopContactFormProps) 
               id="desktop-contact-name"
               name="name"
               type="text"
-              placeholder="Your Name"
+              placeholder={t('form.namePlaceholder')}
               autoComplete="name"
               value={formData.name}
               onChange={(e) => handleChange('name', e.target.value)}
@@ -148,7 +150,7 @@ export function DesktopContactForm({ className = '' }: DesktopContactFormProps) 
               id="desktop-contact-email"
               name="email"
               type="email"
-              placeholder="Your Email"
+              placeholder={t('form.emailPlaceholder')}
               autoComplete="email"
               value={formData.email}
               onChange={(e) => handleChange('email', e.target.value)}
@@ -176,7 +178,7 @@ export function DesktopContactForm({ className = '' }: DesktopContactFormProps) 
             <Textarea
               id="desktop-contact-message"
               name="message"
-              placeholder="Write something..."
+              placeholder={t('form.messagePlaceholder')}
               autoComplete="off"
               value={formData.message}
               onChange={(e) => handleChange('message', e.target.value)}
@@ -209,12 +211,12 @@ export function DesktopContactForm({ className = '' }: DesktopContactFormProps) 
               {isSubmitting ? (
                 <>
                   <Loader2 className="w-5 h-5 mr-3 animate-spin" />
-                  Sending...
+                  {t('form.sending')}
                 </>
               ) : (
                 <>
                   <Send className="w-5 h-5 mr-3 group-hover:translate-x-1 transition-transform duration-300" />
-                  SUBMIT MESSAGE
+                  {t('form.submitMessage')}
                 </>
               )}
             </Button>

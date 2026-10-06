@@ -4,6 +4,7 @@ import { Input } from './ui/input';
 import { Textarea } from './ui/textarea';
 import { toast } from 'sonner';
 import { Loader2 } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 interface FormData {
   name: string;
@@ -16,6 +17,7 @@ interface ContactFormProps {
 }
 
 export function ContactForm({ className = '' }: ContactFormProps) {
+  const { t } = useTranslation();
   const [formData, setFormData] = useState<FormData>({
     name: '',
     email: '',
@@ -28,17 +30,17 @@ export function ContactForm({ className = '' }: ContactFormProps) {
     const newErrors: Partial<FormData> = {};
 
     if (!formData.name.trim()) {
-      newErrors.name = 'Name is required';
+      newErrors.name = t('form.nameRequired');
     }
 
     if (!formData.email.trim()) {
-      newErrors.email = 'Email is required';
+      newErrors.email = t('form.emailRequired');
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = 'Please enter a valid email address';
+      newErrors.email = t('form.emailInvalid');
     }
 
     if (!formData.message.trim()) {
-      newErrors.message = 'Message is required';
+      newErrors.message = t('form.messageRequired');
     }
 
     setErrors(newErrors);
@@ -49,7 +51,7 @@ export function ContactForm({ className = '' }: ContactFormProps) {
     e.preventDefault();
 
     if (!validateForm()) {
-      toast.error('Please fill in all required fields correctly');
+      toast.error(t('form.invalidFields'));
       return;
     }
 
@@ -75,7 +77,7 @@ export function ContactForm({ className = '' }: ContactFormProps) {
             'currency': 'EUR'
           });
         }
-        toast.success("Message sent successfully! We'll get back to you soon.");
+        toast.success(t('form.success'));
         setFormData({ name: '', email: '', message: '' });
         setErrors({});
       } else {
@@ -83,11 +85,11 @@ export function ContactForm({ className = '' }: ContactFormProps) {
         if (data && data.errors && Array.isArray(data.errors)) {
           toast.error(data.errors.map((err: any) => err.message).join(', '));
         } else {
-          toast.error('Failed to send message. Please try again.');
+          toast.error(t('form.failed'));
         }
       }
     } catch (err) {
-      toast.error('Failed to send message. Please check your network and try again.');
+      toast.error(t('form.failedNetwork'));
     } finally {
       setIsSubmitting(false);
     }
@@ -108,18 +110,16 @@ export function ContactForm({ className = '' }: ContactFormProps) {
             id="contact-name"
             name="name"
             type="text"
-            placeholder="Your Name"
+            placeholder={t('form.namePlaceholder')}
             autoComplete="name"
             value={formData.name}
             onChange={(e) => handleChange('name', e.target.value)}
-            className={`w-full bg-[rgba(161,143,133,0.8)] border-2 border-white text-white placeholder-white/70 rounded-2xl h-12 px-4 ${
+            className={`w-full bg-[rgba(161,143,133,0.8)] border border-white text-white placeholder-white/70 rounded-2xl h-12 px-4 shadow-[0_10px_30px_rgba(10,10,10,0.18)] ${
               errors.name ? 'border-red-400' : ''
             }`}
             disabled={isSubmitting}
           />
-          {errors.name && (
-            <p className="text-red-300 text-sm mt-1">{errors.name}</p>
-          )}
+          {errors.name && <p className="text-red-300 text-sm mt-1">{errors.name}</p>}
         </div>
 
         <div>
@@ -127,50 +127,46 @@ export function ContactForm({ className = '' }: ContactFormProps) {
             id="contact-email"
             name="email"
             type="email"
-            placeholder="Your Email"
+            placeholder={t('form.emailPlaceholder')}
             autoComplete="email"
             value={formData.email}
             onChange={(e) => handleChange('email', e.target.value)}
-            className={`w-full bg-[rgba(161,143,133,0.8)] border-2 border-white text-white placeholder-white/70 rounded-2xl h-12 px-4 ${
+            className={`w-full bg-[rgba(161,143,133,0.8)] border border-white text-white placeholder-white/70 rounded-2xl h-12 px-4 shadow-[0_10px_30px_rgba(10,10,10,0.18)] ${
               errors.email ? 'border-red-400' : ''
             }`}
             disabled={isSubmitting}
           />
-          {errors.email && (
-            <p className="text-red-300 text-sm mt-1">{errors.email}</p>
-          )}
+          {errors.email && <p className="text-red-300 text-sm mt-1">{errors.email}</p>}
         </div>
 
         <div>
           <Textarea
             id="contact-message"
             name="message"
-            placeholder="Write something..."
+            placeholder={t('form.messagePlaceholder')}
             autoComplete="off"
             value={formData.message}
             onChange={(e) => handleChange('message', e.target.value)}
-            className={`w-full bg-[rgba(161,143,133,0.8)] border-2 border-white text-white placeholder-white/70 rounded-2xl p-4 min-h-[120px] resize-none ${
+            className={`w-full bg-[rgba(161,143,133,0.8)] border border-white text-white placeholder-white/70 rounded-2xl p-4 min-h-[120px] resize-none shadow-[0_10px_30px_rgba(10,10,10,0.18)] ${
               errors.message ? 'border-red-400' : ''
             }`}
             disabled={isSubmitting}
           />
-          {errors.message && (
-            <p className="text-red-300 text-sm mt-1">{errors.message}</p>
-          )}
+          {errors.message && <p className="text-red-300 text-sm mt-1">{errors.message}</p>}
         </div>
 
         <Button
           type="submit"
           disabled={isSubmitting}
-          className="w-full bg-[#a18f85] hover:bg-[#8d7a70] text-white border-2 border-white rounded-full h-12 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+          className="w-full bg-[#a18f85]/90 hover:bg-[#8d7a70] text-white border border-white rounded-full h-12 transition-all duration-200 shadow-[0_12px_30px_rgba(0,0,0,0.24)] hover:shadow-[0_16px_36px_rgba(0,0,0,0.28)] disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {isSubmitting ? (
             <>
               <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-              Sending...
+              {t('form.sending')}
             </>
           ) : (
-            'SUBMIT'
+            t('form.submit')
           )}
         </Button>
       </form>

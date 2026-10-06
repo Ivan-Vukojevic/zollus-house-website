@@ -1,4 +1,5 @@
 import svgPaths from '../imports/svg-c8ry94iu4r';
+import { useTranslation } from 'react-i18next';
 
 interface AmenityProps {
   icon: React.ReactNode;
@@ -9,12 +10,14 @@ function AmenityItem({ icon, label }: AmenityProps) {
   return (
     <div className="flex flex-col items-center space-y-1 p-2">
       <div className="text-white flex-shrink-0 w-6 h-6 flex items-center justify-center">{icon}</div>
-      <span className="text-white text-xs uppercase font-medium text-center leading-tight">{label}</span>
+      <span className="text-white text-xs uppercase font-medium text-center leading-tight whitespace-nowrap">{label}</span>
     </div>
   );
 }
 
 export function OriginalMobileAmenities() {
+  const { t } = useTranslation();
+
   const amenities = [
     {
       icon: (
@@ -22,7 +25,7 @@ export function OriginalMobileAmenities() {
           <path d={svgPaths.p1b332880} fill="currentColor" />
         </svg>
       ),
-      label: 'WIFI'
+      label: t('amenities.wifi')
     },
     {
       icon: (
@@ -30,7 +33,7 @@ export function OriginalMobileAmenities() {
           <path d={svgPaths.p2c892b00} fill="currentColor" />
         </svg>
       ),
-      label: 'BEDS'
+      label: t('amenities.beds')
     },
     {
       icon: (
@@ -38,7 +41,7 @@ export function OriginalMobileAmenities() {
           <path d={svgPaths.p12c89c80} fill="currentColor" />
         </svg>
       ),
-      label: 'JACUZZI'
+      label: t('amenities.jacuzzi')
     },
     {
       icon: (
@@ -46,7 +49,7 @@ export function OriginalMobileAmenities() {
           <path d={svgPaths.p2459e500} fill="currentColor" />
         </svg>
       ),
-      label: 'BALCONY'
+      label: t('amenities.balcony')
     },
     {
       icon: (
@@ -54,12 +57,12 @@ export function OriginalMobileAmenities() {
           <path d={svgPaths.p3553c080} fill="currentColor" />
         </svg>
       ),
-      label: 'DART'
+      label: t('amenities.dart')
     }
   ];
 
   return (
-    <div className="bg-white/10 backdrop-blur-sm rounded-lg p-3 mt-4">
+    <div className="bg-white/10 backdrop-blur-sm rounded-lg p-2 mt-3 pb-4">
       <div className="grid grid-cols-5 gap-2">
         {amenities.map((amenity, index) => (
           <AmenityItem

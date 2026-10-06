@@ -1,10 +1,12 @@
 
   import { defineConfig } from 'vite';
   import react from '@vitejs/plugin-react-swc';
-  import path from 'path';
+  import path from 'node:path';
+  import { fileURLToPath } from 'node:url';
   import { visualizer } from 'rollup-plugin-visualizer';
 
   const ANALYZE = process.env.ANALYZE === '1' || process.env.ANALYZE === 'true';
+  const rootDir = fileURLToPath(new URL('.', import.meta.url));
 
   export default defineConfig(async () => {
   const { imagetools } = await import('vite-imagetools');
@@ -37,7 +39,7 @@
     resolve: {
       extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
       alias: {
-        '@': path.resolve(__dirname, './src'),
+        '@': path.resolve(rootDir, './src'),
       },
     },
     build: {

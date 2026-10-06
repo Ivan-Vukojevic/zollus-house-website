@@ -1,4 +1,5 @@
 import { Home, Info, Camera, Phone } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 interface MobileNavigationProps {
   activeSection: string;
@@ -6,15 +7,17 @@ interface MobileNavigationProps {
 }
 
 export function MobileNavigation({ activeSection, onSectionChange }: MobileNavigationProps) {
+  const { t } = useTranslation();
+
   const navItems = [
-    { id: 'welcome', label: 'Home', icon: Home },
-    { id: 'about', label: 'About', icon: Info },
-    { id: 'gallery', label: 'Gallery', icon: Camera },
-    { id: 'contact', label: 'Contact', icon: Phone },
+    { id: 'welcome', label: t('nav.home'), icon: Home },
+    { id: 'about', label: t('nav.about'), icon: Info },
+    { id: 'gallery', label: t('nav.gallery'), icon: Camera },
+    { id: 'contact', label: t('nav.contact'), icon: Phone },
   ];
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-gray-200 shadow-lg">
+    <nav className="fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-gray-300 shadow-lg">
       <div className="flex justify-around items-center py-2">
         {navItems.map(({ id, label, icon: Icon }) => (
           <button
@@ -26,7 +29,7 @@ export function MobileNavigation({ activeSection, onSectionChange }: MobileNavig
                 : 'text-gray-500 hover:text-[#a18f85]'
             }`}
           >
-            <Icon size={20} />
+            <Icon size={22} />
             <span className="text-xs mt-1">{label}</span>
           </button>
         ))}

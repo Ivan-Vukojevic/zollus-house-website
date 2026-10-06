@@ -1,5 +1,6 @@
 import { motion } from 'motion/react';
 import { Wifi } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import svgPaths from '../imports/svg-hlfzlrhqss';
 
 interface AmenityCardProps {
@@ -28,10 +29,12 @@ function AmenityCard({ icon, label, delay }: AmenityCardProps) {
 }
 
 export function DesktopAmenities() {
+  const { t } = useTranslation();
+
   const amenities = [
     {
       icon: <Wifi size={32} />,
-      label: 'WIFI'
+      label: t('amenities.wifi')
     },
     {
       icon: (
@@ -39,7 +42,7 @@ export function DesktopAmenities() {
           <path d={svgPaths.p1cfd9100} fill="currentColor" />
         </svg>
       ),
-      label: '8 BEDS'
+      label: t('amenities.beds')
     },
     {
       icon: (
@@ -47,7 +50,7 @@ export function DesktopAmenities() {
           <path d={svgPaths.p1d7c7b00} fill="currentColor" />
         </svg>
       ),
-      label: 'JACUZZI'
+      label: t('amenities.jacuzzi')
     },
     {
       icon: (
@@ -55,7 +58,7 @@ export function DesktopAmenities() {
           <path d={svgPaths.p4368af0} fill="currentColor" />
         </svg>
       ),
-      label: 'BALCONY'
+      label: t('amenities.balcony')
     },
     {
       icon: (
@@ -63,7 +66,7 @@ export function DesktopAmenities() {
           <path d={svgPaths.p9eb7280} fill="currentColor" />
         </svg>
       ),
-      label: 'DART'
+      label: t('amenities.dart')
     }
   ];
 

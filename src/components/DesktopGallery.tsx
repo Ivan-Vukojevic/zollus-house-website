@@ -3,6 +3,7 @@ import { ChevronLeft, ChevronRight, X, ZoomIn } from 'lucide-react';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 import { ResponsivePicture, buildSrcSet } from './figma/ResponsivePicture';
 import { motion, AnimatePresence } from 'motion/react';
+import { useTranslation } from 'react-i18next';
 import imgRectangle1 from '../assets/gallery/living-room-overview.jpg';
 import imgRectangle2 from '../assets/gallery/bathroom-deluxe-overview.png';
 import imgRectangle3 from '../assets/gallery/living-room-wide-angle.jpg';
@@ -55,34 +56,35 @@ interface DesktopGalleryProps {
 }
 
 export function DesktopGallery({ className = '' }: DesktopGalleryProps) {
+  const { t } = useTranslation();
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
 
   const images = [
-    { src: imgRectangle1, alt: 'Luxury interior view 1' },
-    { src: imgRectangle2, alt: 'Bathroom with modern fixtures' },
-    { src: imgRectangle3, alt: 'Main living area' },
-    { src: imgRectangle4, alt: 'Elegant bedroom design' },
-    { src: imgRectangle5, alt: 'Stylish decor details' },
-    { src: imgRectangle6, alt: 'Cozy garden ambiance'  },
-    { src: imgRectangle7, alt: 'Scenic outdoor view'  },
-    { src: imgRectangle8, alt: 'Spacious kitchen area'  },
-    { src: imgRectangle9, alt: 'Dining area setup'  },
-    { src: imgRectangle10, alt: 'Comfortable seating'  },
-    { src: imgRectangle11, alt: 'Quad Room'  },
-    { src: imgRectangle12, alt: 'Reception'  },
-    { src: imgRectangle13, alt: 'Night View'  },
-    { src: imgRectangle14, alt: 'Shared Room'  },
-    { src: imgRectangle15, alt: 'Stairway'  },
-    { src: imgRectangle16, alt: 'Attic'  },
-    { src: imgRectangle17, alt: 'Bedroom Attic View'  },
-    { src: imgRectangle18, alt: 'Main Entrance'  },
-    { src: imgRectangle19, alt: 'Jacuzzi with Deckchairs'  },
-    { src: imgRectangle20, alt: 'Standard Bathroom'  },
-    { src: imgRectangle21, alt: 'Window View'  },
-    { src: imgRectangle22, alt: 'Quad Room Entrance View'  },
-    { src: imgRectangle23, alt: 'Peaceful Night Garden'  },
-    { src: imgRectangle24, alt: 'Kitchen Overview'  },
-    { src: imgRectangle25, alt: 'Jacuzzi Hangout with Sled'  },
+    { src: imgRectangle1, key: 'livingRoom' },
+    { src: imgRectangle2, key: 'deluxeBathroom' },
+    { src: imgRectangle3, key: 'loungeArea' },
+    { src: imgRectangle4, key: 'deluxeBedroom' },
+    { src: imgRectangle5, key: 'lobbyEntrance' },
+    { src: imgRectangle6, key: 'seatingArea' },
+    { src: imgRectangle7, key: 'nightAmbiance' },
+    { src: imgRectangle8, key: 'morningLight' },
+    { src: imgRectangle9, key: 'outdoorGames' },
+    { src: imgRectangle10, key: 'jacuzziSpa' },
+    { src: imgRectangle11, key: 'familyRoom' },
+    { src: imgRectangle12, key: 'mainLobby' },
+    { src: imgRectangle13, key: 'nightExterior' },
+    { src: imgRectangle14, key: 'groupRoom' },
+    { src: imgRectangle15, key: 'grandStaircase' },
+    { src: imgRectangle16, key: 'atticChillZone' },
+    { src: imgRectangle17, key: 'bedroomAtticView' },
+    { src: imgRectangle18, key: 'mainEntrance' },
+    { src: imgRectangle19, key: 'jacuzziDeckchairs' },
+    { src: imgRectangle20, key: 'bathroomOverview' },
+    { src: imgRectangle21, key: 'roadView' },
+    { src: imgRectangle22, key: 'quadBedroomEntrance' },
+    { src: imgRectangle23, key: 'nightGarden' },
+    { src: imgRectangle24, key: 'kitchenOverview' },
+    { src: imgRectangle25, key: 'jacuzziHangout' },
   ];
 
   const openLightbox = (index: number) => {
@@ -111,11 +113,9 @@ export function DesktopGallery({ className = '' }: DesktopGalleryProps) {
     <div className={className}>
       {/* Gallery Header */}
       <div className="text-center mb-12">
-        <h2 className="text-6xl font-bold text-[#a18f85] mb-6 uppercase">Gallery</h2>
+        <h2 className="text-6xl font-bold text-[#a18f85] mb-6 uppercase">{t('gallery.title')}</h2>
         <p className="text-lg text-[#a18576] max-w-4xl mx-auto leading-relaxed">
-          Guests are in for a truly special experience at this elegant apartment, featuring a luxurious hot tub for ultimate relaxation. 
-          Designed for comfort and privacy, the apartment boasts a private entrance and an expansive layout, including a stylish living room, 
-          two well-appointed bedrooms, and two modern bathrooms with either a bath or a shower.
+          {t('gallery.description1')} {t('gallery.description2')}
         </p>
       </div>
 
@@ -132,7 +132,7 @@ export function DesktopGallery({ className = '' }: DesktopGalleryProps) {
             <div className="aspect-[4/5] relative">
               {index < 10 ? (
                 <ResponsivePicture
-                  alt={image.alt}
+                  alt={t(`gallery.imageAlts.${image.key}`)}
                   imgSrc={image.src}
                   imgClassName="w-full h-full object-cover"
                   sizes="(min-width: 1280px) 20vw, (min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
@@ -144,7 +144,7 @@ export function DesktopGallery({ className = '' }: DesktopGalleryProps) {
               ) : (
                 <ImageWithFallback
                   src={image.src}
-                  alt={image.alt}
+                  alt={t(`gallery.imageAlts.${image.key}`)}
                   className="w-full h-full object-cover"
                   loading='lazy'
                 />
@@ -172,7 +172,7 @@ export function DesktopGallery({ className = '' }: DesktopGalleryProps) {
             {/* Close Button */}
             <button
               onClick={closeLightbox}
-              className="absolute top-4 right-4 z-10 p-2 rounded-full bg-white/20 hover:bg-white/30 transition-colors" aria-label="Close lightbox"
+              className="absolute top-4 right-4 z-10 p-2 rounded-full bg-white/20 hover:bg-white/30 transition-colors" aria-label={t('gallery.closeLightbox')}
             >
               <X className="w-6 h-6 text-white" />
             </button>
@@ -183,7 +183,7 @@ export function DesktopGallery({ className = '' }: DesktopGalleryProps) {
                 e.stopPropagation();
                 prevImage();
               }}
-              className="absolute left-4 top-1/2 -translate-y-1/2 z-10 p-3 rounded-full bg-white/20 hover:bg-white/30 transition-colors" aria-label="Previous image"
+              className="absolute left-4 top-1/2 -translate-y-1/2 z-10 p-3 rounded-full bg-white/20 hover:bg-white/30 transition-colors" aria-label={t('gallery.previousImage')}
             >
               <ChevronLeft className="w-6 h-6 text-white" />
             </button>
@@ -194,7 +194,7 @@ export function DesktopGallery({ className = '' }: DesktopGalleryProps) {
                 e.stopPropagation();
                 nextImage();
               }}
-              className="absolute right-4 top-1/2 -translate-y-1/2 z-10 p-3 rounded-full bg-white/20 hover:bg-white/30 transition-colors" aria-label="Next image"
+              className="absolute right-4 top-1/2 -translate-y-1/2 z-10 p-3 rounded-full bg-white/20 hover:bg-white/30 transition-colors" aria-label={t('gallery.nextImage')}
             >
               <ChevronRight className="w-6 h-6 text-white" />
             </button>
@@ -211,7 +211,7 @@ export function DesktopGallery({ className = '' }: DesktopGalleryProps) {
             >
               <ImageWithFallback
                 src={images[selectedImage].src}
-                alt={images[selectedImage].alt}
+                alt={t(`gallery.imageAlts.${images[selectedImage].key}`)}
                 className="w-full h-full object-contain rounded-lg"
               />
             </motion.div>

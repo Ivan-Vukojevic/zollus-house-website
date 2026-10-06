@@ -3,6 +3,7 @@ import { X, ZoomIn } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 import { ResponsivePicture, buildSrcSet } from './figma/ResponsivePicture';
+import { useTranslation } from 'react-i18next';
 import imgRectangle1 from '../assets/gallery/living-room-overview.jpg';
 import imgRectangle2 from '../assets/gallery/bathroom-deluxe-overview.png';
 import imgRectangle3 from '../assets/gallery/living-room-wide-angle.jpg';
@@ -43,133 +44,109 @@ interface MobileGridGalleryProps {
 }
 
 export function MobileGridGallery({ className = '' }: MobileGridGalleryProps) {
+  const { t } = useTranslation();
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
 
   const images = [
     {
-      src: imgRectangle1, 
-      alt: 'Spacious living room with natural lighting',
-      title: 'Living Room' 
+      src: imgRectangle1,
+      key: 'livingRoom'
     },
     {
-      src: imgRectangle2, 
-      alt: 'Luxury bathroom with premium fixtures',
-      title: 'Deluxe Bathroom' 
+      src: imgRectangle2,
+      key: 'deluxeBathroom'
     },
     {
-      src: imgRectangle3, 
-      alt: 'Living room wide perspective view',
-      title: 'Lounge Area' 
+      src: imgRectangle3,
+      key: 'loungeArea'
     },
     {
-      src: imgRectangle4, 
-      alt: 'Elegant deluxe bedroom with comfortable bed',
-      title: 'Deluxe Bedroom' 
+      src: imgRectangle4,
+      key: 'deluxeBedroom'
     },
     {
-      src: imgRectangle5, 
-      alt: 'Welcoming lobby and entrance area',
-      title: 'Lobby & Entrance' 
+      src: imgRectangle5,
+      key: 'lobbyEntrance'
     },
     {
-      src: imgRectangle6, 
-      alt: 'Comfortable seating area with premium sofa',
-      title: 'Seating Area' 
+      src: imgRectangle6,
+      key: 'seatingArea'
     },
     {
-    src: imgRectangle7, 
-    alt: 'Cozy evening seating with ambient lighting',
-    title: 'Night Ambiance' 
+      src: imgRectangle7,
+      key: 'nightAmbiance'
     },
     {
       src: imgRectangle8,
-      alt: 'Beautiful morning light throughout the space',
-      title: 'Morning Light' 
+      key: 'morningLight'
     },
     {
       src: imgRectangle9,
-      alt: 'Outdoor recreation and games area',
-      title: 'Outdoor Games'
+      key: 'outdoorGames'
     },
     {
-      src: imgRectangle10, 
-      alt: 'Relaxing backyard jacuzzi and spa area',
-      title: 'Jacuzzi & Spa' 
+      src: imgRectangle10,
+      key: 'jacuzziSpa'
     },
     {
-      src: imgRectangle11, 
-      alt: 'Spacious room with four comfortable beds',
-      title: 'Family Room'  
+      src: imgRectangle11,
+      key: 'familyRoom'
     },
     {
-      src: imgRectangle12, 
-      alt: 'Grand main lobby and reception area',
-      title: 'Main Lobby'  
+      src: imgRectangle12,
+      key: 'mainLobby'
     },
     {
-      src: imgRectangle13, 
-      alt: 'Beautiful nighttime exterior view',
-      title: 'Night Exterior'
+      src: imgRectangle13,
+      key: 'nightExterior'
     },
     {
       src: imgRectangle14,
-      alt: 'Comfortable family room with multiple beds',
-      title: 'Group Room'
+      key: 'groupRoom'
     },
     {
       src: imgRectangle15,
-      alt: 'Elegant wooden staircase with classic design',
-      title: 'Grand Staircase'
+      key: 'grandStaircase'
     },
     {
       src: imgRectangle16,
-      alt: 'Cozy attic chill section with soft lighting',
-      title: 'Attic Chill Zone'
+      key: 'atticChillZone'
     },
     {
       src: imgRectangle17,
-      alt: 'Spacious bedroom with attic view',
-      title: 'Bedroom Attic View'
+      key: 'bedroomAtticView'
     },
     {
       src: imgRectangle18,
-      alt: 'Main entrance facade with welcoming design',
-      title: 'Main Entrance'
+      key: 'mainEntrance'
     },
     {
       src: imgRectangle19,
-      alt: 'Jacuzzi area with deckchairs for relaxation',
-      title: 'Jacuzzi Deckchairs'
+      key: 'jacuzziDeckchairs'
     },
     {
       src: imgRectangle20,
-      alt: 'Standard bathroom overview with modern fixtures',
-      title: 'Bathroom Overview'
+      key: 'bathroomOverview'
     },
     {
       src: imgRectangle21,
-      alt: 'Window view overlooking the road',
-      title: 'Road View'
+      key: 'roadView'
     },
     {
       src: imgRectangle22,
-      alt: 'Quad bedroom entrance view',
-      title: 'Quad Bedroom Entrance'
+      key: 'quadBedroomEntrance'
     },
     {
       src: imgRectangle23,
-      alt: 'Peaceful night garden ambiance',
-      title: 'Night Garden'
+      key: 'nightGarden'
     },
     {
       src: imgRectangle24,
-      alt: 'Kitchen overview with modern appliances',
-      title: 'Kitchen Overview'
+      key: 'kitchenOverview'
     },
     {
       src: imgRectangle25,
-      alt: 'Jacuzzi hangout area with sleds',
-      title: 'Jacuzzi Hangout'
+      key: 'jacuzziHangout'
     }
   ];
 
@@ -203,7 +180,7 @@ export function MobileGridGallery({ className = '' }: MobileGridGalleryProps) {
           transition={{ duration: 0.8 }}
           className="text-4xl font-bold text-center uppercase mb-6"
         >
-          Gallery
+          {t('gallery.title')}
         </motion.h2>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -212,11 +189,10 @@ export function MobileGridGallery({ className = '' }: MobileGridGalleryProps) {
           className="max-w-md mx-auto space-y-4 text-center mb-8"
         >
           <p className="text-sm leading-relaxed mobile-gallery-text">
-            Guests are in for a truly special experience at this elegant apartment, featuring a luxurious hot tub for ultimate relaxation.
+            {t('gallery.description1')}
           </p>
           <p className="text-sm leading-relaxed mobile-gallery-text">
-            Designed for comfort and privacy, the apartment boasts a private entrance and an expansive layout, including a stylish living room, 
-            two well-appointed bedrooms, and two modern bathrooms with either a bath or a shower.
+            {t('gallery.description2')}
           </p>
         </motion.div>
       </div>
@@ -238,7 +214,7 @@ export function MobileGridGallery({ className = '' }: MobileGridGalleryProps) {
               >
                 {index < 4 ? (
                   <ResponsivePicture
-                    alt={image.alt}
+                    alt={t(`gallery.imageAlts.${image.key}`)}
                     imgSrc={image.src}
                     imgClassName="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
                     sizes="(min-width: 768px) 50vw, 50vw"
@@ -250,7 +226,7 @@ export function MobileGridGallery({ className = '' }: MobileGridGalleryProps) {
                 ) : (
                   <ImageWithFallback
                     src={image.src}
-                    alt={image.alt}
+                    alt={t(`gallery.imageAlts.${image.key}`)}
                     className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
                   />
                 )}
@@ -262,7 +238,7 @@ export function MobileGridGallery({ className = '' }: MobileGridGalleryProps) {
                 <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                   <div className="text-center text-white">
                     <ZoomIn className="w-8 h-8 mx-auto mb-2" />
-                    <p className="text-sm font-medium uppercase">{image.title}</p>
+                    <p className="text-sm font-medium uppercase">{t(`gallery.imageTitles.${image.key}`)}</p>
                   </div>
                 </div>
               </div>
@@ -285,7 +261,7 @@ export function MobileGridGallery({ className = '' }: MobileGridGalleryProps) {
             <button
               onClick={closeModal}
               className="absolute top-4 right-4 z-60 text-white hover:text-gray-300 transition-colors"
-              aria-label="Close image"
+              aria-label={t('gallery.closeImage')}
             >
               <X className="w-8 h-8" />
             </button>
@@ -297,7 +273,7 @@ export function MobileGridGallery({ className = '' }: MobileGridGalleryProps) {
                 prevImage();
               }}
               className="absolute left-4 top-1/2 -translate-y-1/2 z-60 text-white hover:text-gray-300 transition-colors"
-              aria-label="Previous image"
+              aria-label={t('gallery.previousImage')}
             >
               <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -310,7 +286,7 @@ export function MobileGridGallery({ className = '' }: MobileGridGalleryProps) {
                 nextImage();
               }}
               className="absolute right-4 top-1/2 -translate-y-1/2 z-60 text-white hover:text-gray-300 transition-colors"
-              aria-label="Next image"
+              aria-label={t('gallery.nextImage')}
             >
               <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -327,15 +303,15 @@ export function MobileGridGallery({ className = '' }: MobileGridGalleryProps) {
             >
               <ImageWithFallback
                 src={images[selectedImage].src}
-                alt={images[selectedImage].alt}
+                alt={t(`gallery.imageAlts.${images[selectedImage].key}`)}
                 className="w-full h-full object-contain rounded-lg"
                 loading='lazy'
               />
               
               {/* Image info */}
               <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4 rounded-b-lg">
-                <h3 className="text-white text-lg font-medium">{images[selectedImage].title}</h3>
-                <p className="text-white/80 text-sm">{images[selectedImage].alt}</p>
+                <h3 className="text-white text-lg font-medium">{t(`gallery.imageTitles.${images[selectedImage].key}`)}</h3>
+                <p className="text-white/80 text-sm">{t(`gallery.imageAlts.${images[selectedImage].key}`)}</p>
               </div>
             </motion.div>
 
