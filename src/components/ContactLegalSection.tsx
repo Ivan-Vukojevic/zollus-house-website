@@ -1,6 +1,7 @@
 import { ExternalLink } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
+// Legal and contact information for Zollus House
 const OWNER_DATA = {
   owner: 'Alen Vukojević',
   oib: '47555896124',
